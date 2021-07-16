@@ -1,25 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { navigationRef, isReadyRef } from './src/navigation/navigation';
+import { SplashScreen } from './src/components/Navigation/SplashScreen';
+import { Navigation } from './src/components/Navigation/Navigation';
+import { configureStore } from './src/redux/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ThemeProvider } from './src/components/Kit';
 
-const App = () => {
+export const { store, persistor } = configureStore();
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello World!</Text>
-    </View>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => {
+        // @ts-ignore
+        isReadyRef.current = true;
+      }}
+    >
+      <Provider store={store}>
+        <PersistGate loading={<SplashScreen />} persistor={persistor}>
+          <ThemeProvider>
+            <SafeAreaProvider>
+              <Navigation />
+            </SafeAreaProvider>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-});
-
-export default App;
+}
