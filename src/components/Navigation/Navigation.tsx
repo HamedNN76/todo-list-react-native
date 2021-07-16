@@ -17,20 +17,35 @@ export function Navigation(): JSX.Element {
               backgroundColor: colors.headerBg,
               height: 100,
             },
-            headerTitle: ({ children }) => (
-              <Text color="white" typo="xl" bold>
-                {children}
-              </Text>
-            ),
+            headerBackTitleStyle: {
+              color: colors.white,
+            },
+            headerTintColor: colors.white,
           }}
         >
           <Stack.Screen
             name={config.routes.todoList}
             component={TodoListScreen}
+            options={{
+              headerTitle: () => (
+                <Text color="white" typo="xl" bold>
+                  Todo List
+                </Text>
+              ),
+            }}
           />
           <Stack.Screen
             name={config.routes.listItem}
             component={TodoListScreen}
+            options={({ route }) => ({
+              headerTitle: () => {
+                return (
+                  <Text color="white" typo="xl" bold>
+                    {`List Item ${route.params.id}`}
+                  </Text>
+                );
+              },
+            })}
           />
         </Stack.Navigator>
       </Card>
