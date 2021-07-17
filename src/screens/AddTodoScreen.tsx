@@ -3,20 +3,35 @@ import { useForm } from 'react-hook-form';
 import { addTodoResolved } from '../validators/AddTodoSchema';
 import { Controller, Input, Button, ScreenContainer } from '../components/Kit';
 import { useFetch } from '../hooks/useFetch';
+import { StackNavigationProp } from '../navigation/Stack';
+import { loadTodoList } from '../redux/modules/todoList';
+import { useAppDispatch } from '../hooks/store';
+
+export type AddTodoScreenProps = {
+  navigation: StackNavigationProp<'AddTodo'>;
+};
 
 export type IAddTodoForm = {
   title: string;
   description: string;
 };
 
-export function AddTodoScreen() {
+export function AddTodoScreen(props: AddTodoScreenProps) {
+  const { navigation } = props;
+
   const [createTodo, doCreateTodo] = useFetch('todoList.create');
+
+  const dispatch = useAppDispatch();
 
   const onSubmit = (data: IAddTodoForm) => {
     doCreateTodo({
       form: {
         ...data,
         category: 2,
+      },
+      afterSuccess: () => {
+        navigation.goBack();
+        dispatch(loadTodoList());
       },
     });
   };

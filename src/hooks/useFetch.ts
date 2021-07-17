@@ -9,18 +9,19 @@ export type TUseFetchState<Form, Data, Error> = {
   form: Form | null;
 };
 
-export type TUseFetchOptions = {
+export type TUseFetchOptions<Data> = {
   didMount?: boolean;
   showAlert?: boolean;
   form?: any;
+  afterSuccess?: (data: Data) => void;
 };
 
 export function useFetch<Form, Data, Error>(
   name: string,
-  options: TUseFetchOptions = {}
+  options: TUseFetchOptions<Data> = {}
 ): [
   TUseFetchState<Form, Data, Error>,
-  (fetchOptions: TUseFetchOptions) => void,
+  (fetchOptions: TUseFetchOptions<Data>) => void,
   (state: TUseFetchState<Form, Data, Error>) => void
 ] {
   const initialState: TUseFetchState<Form, Data, Error> = {
@@ -33,9 +34,8 @@ export function useFetch<Form, Data, Error>(
     useState<TUseFetchState<Form, Data, Error>>(initialState);
 
   const doFetch = useCallback(
-    async (fetchOptions: TUseFetchOptions) => {
-      console.log('started');
-      const { showAlert = true, form } = fetchOptions;
+    async (fetchOptions: TUseFetchOptions<Data>) => {
+      const { showAlert = true, form, afterSuccess } = fetchOptions;
       try {
         setState({
           ...state,
@@ -48,6 +48,7 @@ export function useFetch<Form, Data, Error>(
           data: res,
           loading: false,
         });
+        afterSuccess?.(res);
       } catch (e) {
         setState({
           ...state,

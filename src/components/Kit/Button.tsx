@@ -43,7 +43,7 @@ type StyledButtonProps = TouchableOpacityProps &
   SetShadow &
   SetTypography;
 export type ButtonProps = StyledButtonProps & {
-  text: string;
+  text?: string;
   filled?: boolean;
   block?: boolean;
   size?: 'sm' | 'lg' | 'xs';
@@ -132,7 +132,7 @@ export function Button(props: ButtonProps): JSX.Element {
       ) : null}
       {loading ? (
         <BeatLoader />
-      ) : (
+      ) : text ? (
         <Text
           bold={bold}
           typo={typo}
@@ -141,7 +141,7 @@ export function Button(props: ButtonProps): JSX.Element {
         >
           {text}
         </Text>
-      )}
+      ) : null}
       {endIcon ? (
         <Icon
           name={endIcon}

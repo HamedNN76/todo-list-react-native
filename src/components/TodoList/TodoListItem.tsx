@@ -2,7 +2,7 @@ import React from 'react';
 import { config } from '../../../config';
 import { navigate } from '../../navigation/navigation';
 import { TTodoListItem } from '../../types/webServices/todoList';
-import { Card, Text } from '../Kit';
+import { Button, Card, Text } from '../Kit';
 
 export type TodoListItemProps = {
   item: TTodoListItem;
@@ -11,8 +11,8 @@ export type TodoListItemProps = {
 export function TodoListItem(props: TodoListItemProps) {
   const { item } = props;
 
-  const navigateToTodoItem = (title: string) => {
-    navigate(config.routes.listItem, { title });
+  const navigateToTodoItem = () => {
+    navigate(config.routes.listItem, { title: item.title });
   };
 
   return (
@@ -22,15 +22,31 @@ export function TodoListItem(props: TodoListItemProps) {
       padding={1}
       curve
       border
-      onTouchStart={() => navigateToTodoItem(item.title)}
+      flexDirection="row"
+      justifyContent="center"
+      alignItems="center"
     >
-      <Text typo="lg" bold>
-        {item.title}
-      </Text>
-      <Card borderWidth="0.5px" margin={[0, 0, 1, 0]} />
-      <Text typo="sm" ellipsizeMode="tail" numberOfLines={1}>
-        {item.description}
-      </Text>
+      <Card flex={1} padding={[0, 1, 0, 0]}>
+        <Text typo="lg" bold>
+          {item.title}
+        </Text>
+        <Card borderWidth="0.5px" margin={[0, 0, 1, 0]} />
+        <Text typo="sm" ellipsizeMode="tail" numberOfLines={1}>
+          {item.description}
+        </Text>
+      </Card>
+      <Card>
+        <Button
+          text=""
+          startIcon="eye"
+          _minWidth="0px"
+          padding={0}
+          _height="40px"
+          margin={0}
+          bg="white"
+          onPress={navigateToTodoItem}
+        />
+      </Card>
     </Card>
   );
 }
