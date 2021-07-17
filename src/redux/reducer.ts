@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import test from './modules/test';
+import todoList from './modules/todoList';
 
 const reducers = combineReducers({
-  test,
+  todoList,
 });
 
 export default reducers;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { addTodoResolved } from '../validators/AddTodoSchema';
 import { Controller, Input, Button, ScreenContainer } from '../components/Kit';
+import { useFetch } from '../hooks/useFetch';
 
 export type IAddTodoForm = {
   title: string;
@@ -9,8 +10,15 @@ export type IAddTodoForm = {
 };
 
 export function AddTodoScreen() {
+  const [createTodo, doCreateTodo] = useFetch('todoList.create');
+
   const onSubmit = (data: IAddTodoForm) => {
-    console.log(data);
+    doCreateTodo({
+      form: {
+        ...data,
+        category: 2,
+      },
+    });
   };
 
   const {
@@ -71,6 +79,8 @@ export function AddTodoScreen() {
         size="lg"
         typo="md"
         bold
+        loading={createTodo.loading}
+        disabled={createTodo.loading}
       />
     </ScreenContainer>
   );

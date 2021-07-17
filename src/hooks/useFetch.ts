@@ -42,7 +42,7 @@ export function useFetch<Form, Data, Error>(
           loading: true,
           form,
         });
-        const res = await fetch<Data, Error>(name);
+        const res = await fetch<Data>(name, { data: form });
         setState({
           ...state,
           data: res,

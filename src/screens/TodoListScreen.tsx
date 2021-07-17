@@ -1,10 +1,11 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { config } from '../../config';
 import { ScreenContainer, Button, Loading, Card } from '../components/Kit';
 import { TodoListItems } from '../components/TodoList/TodoListItems';
-import { useFetch } from '../hooks/useFetch';
+import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { StackNavigationProp } from '../navigation/Stack';
-import { TTodoListData } from '../types/webServices/todoList';
+import { loadTodoList } from '../redux/modules/todoList';
 
 export type TodoListScreenProps = {
   navigation: StackNavigationProp<'TodoList'>;
@@ -12,16 +13,19 @@ export type TodoListScreenProps = {
 export function TodoListScreen(props: TodoListScreenProps) {
   const { navigation } = props;
 
-  const [todoList] = useFetch<undefined, TTodoListData, {}>('todoList.get', {
-    didMount: true,
-  });
+  const todoList = useAppSelector((state) => state.todoList);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadTodoList());
+  }, [dispatch]);
 
   const navigateToAddTodo = () => {
     navigation.navigate(config.routes.addTodo);
   };
 
   return (
-    <ScreenContainer bg="secondaryBg" safeArea>
+    <ScreenContainer bg="secondaryBg" safeArea padding={[0, 1]}>
       <Card flex={1} padding={[1, 0]}>
         <Loading loading={todoList.loading}>
           {todoList.data ? <TodoListItems items={todoList.data} /> : null}

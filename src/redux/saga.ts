@@ -1,6 +1,6 @@
-import { all } from 'redux-saga/effects';
-import { Store } from '../types/types';
+import { LOAD_TODO_LIST, watchGetTodoList } from './modules/todoList';
+import { all, takeEvery } from 'redux-saga/effects';
 
-export function* rootSaga(store: Store) {
-  yield all([]);
+export function* rootSaga() {
+  yield all([takeEvery(LOAD_TODO_LIST, watchGetTodoList)]);
 }

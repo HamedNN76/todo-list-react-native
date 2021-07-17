@@ -1,7 +1,7 @@
 import { config } from './../../config';
 import PostmanFetch from 'postman-fetch';
 import * as postmanCollection from '../../todo-list.postman_collection.json';
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const postmanFetchOptions = {
   variables: {
@@ -11,7 +11,7 @@ const postmanFetchOptions = {
   headers: {
     'Content-Type': 'application/json',
   },
-  debug: false,
+  debug: true,
 };
 export const postmanFetch = new PostmanFetch(
   postmanCollection,
@@ -20,9 +20,9 @@ export const postmanFetch = new PostmanFetch(
 
 export const setVariables = postmanFetch.setVariables;
 
-export function fetch<Data, Error>(
+export function fetch<Data>(
   postmanFetchKey: string,
-  options: { data?: any } = {}
+  options: AxiosRequestConfig = {}
 ) {
   return new Promise<Data>((resolve, reject) => {
     console.log(postmanFetchKey, 'postman fetch key started');
