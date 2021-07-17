@@ -12,6 +12,8 @@ import {
   SetTypography,
   setRadius,
   SetRadius,
+  setBorder,
+  SetBorder,
 } from '../../stylesheet';
 import styled from 'styled-components/native';
 import { setSpace, SetSpace } from '../../stylesheet/space';
@@ -45,6 +47,7 @@ export type TextProps = {
   SetJustifyContent &
   SetRadius &
   SetFlexDirection &
+  SetBorder &
   NativeTextProps;
 
 const StyledText: React.FunctionComponent<TextProps> = styled.Text<TextProps>`
@@ -59,6 +62,7 @@ const StyledText: React.FunctionComponent<TextProps> = styled.Text<TextProps>`
   ${setJustifyContent};
   ${setRadius};
   ${setFlexDirection};
+  ${setBorder};
   ${setStyle};
 `;
 

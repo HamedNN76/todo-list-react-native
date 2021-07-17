@@ -4,8 +4,9 @@ import { StackNavigationProp as LibraryProp } from '@react-navigation/stack/lib/
 type RootStackParamList = {
   TodoList: undefined;
   ListItem: {
-    id: string;
+    title: string;
   };
+  AddTodo: undefined;
 };
 
 export type StackNavigationProp<ScreenName extends keyof RootStackParamList> =

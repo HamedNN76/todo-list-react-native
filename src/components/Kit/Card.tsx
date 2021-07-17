@@ -30,7 +30,6 @@ import { ChildrenProp } from '../../types/types';
 
 export type CardProps = {
   children?: ChildrenProp;
-  onClick?: Function;
   style?: any;
 } & ViewProps &
   SetBackgroundColor &

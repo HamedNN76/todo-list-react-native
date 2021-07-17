@@ -96,16 +96,10 @@ export type SetBorder = {
   borderStyle?: 'solid' | 'dashed' | 'dotted';
 };
 export const setBorder = (props: SetBorder) => {
-  const {
-    border,
-    theme,
-    borderColor = 'border',
-    borderStyle,
-    borderWidth,
-  } = props;
+  const { border, theme, borderColor, borderStyle, borderWidth } = props;
   if (border === true) {
     return setStyle({
-      _border: `1px solid ${theme?.[borderColor]}`,
+      _border: `1px solid ${theme?.[borderColor || 'border']}`,
     });
   } else if (border) {
     return setStyle({ _border: border });

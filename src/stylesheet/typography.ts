@@ -8,8 +8,6 @@ export const typography: Typography = {
   title: '36px',
 };
 
-export type Typo = 'tiny' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'title';
-
 export type Typography = {
   tiny: string;
   xs: string;
@@ -19,3 +17,5 @@ export type Typography = {
   xl: string;
   title: string;
 };
+
+export type Typo = keyof Typography;

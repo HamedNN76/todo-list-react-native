@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "810abb88-42e4-49c5-a1a9-69219806bda6",
+		"name": "todo-list",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "todoList",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/todoList",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todoList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\": 0,\n    \"description\": \"Hi4 there\",\n    \"title\": \"Title4 is here\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/todoList",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todoList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\": 2,\n    \"title\": \"hi\",\n    \"description\": \"detail\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/todoList/{{todoListId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todoList",
+								"{{todoListId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/todoList/{{todoListId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todoList",
+								"{{todoListId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

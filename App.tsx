@@ -22,11 +22,11 @@ export default function App() {
     >
       <Provider store={store}>
         <PersistGate loading={<SplashScreen />} persistor={persistor}>
-          <ThemeProvider>
-            <SafeAreaProvider>
+          <SafeAreaProvider>
+            <ThemeProvider>
               <Navigation />
-            </SafeAreaProvider>
-          </ThemeProvider>
+            </ThemeProvider>
+          </SafeAreaProvider>
         </PersistGate>
       </Provider>
     </NavigationContainer>

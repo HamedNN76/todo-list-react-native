@@ -1,32 +1,42 @@
 import React from 'react';
 import { config } from '../../config';
-import { Button, ScreenContainer, Text } from '../components/Kit';
+import { ScreenContainer, Button, Loading, Card } from '../components/Kit';
+import { TodoListItems } from '../components/TodoList/TodoListItems';
+import { useFetch } from '../hooks/useFetch';
 import { StackNavigationProp } from '../navigation/Stack';
+import { TTodoListData } from '../types/webServices/todoList';
 
 export type TodoListScreenProps = {
   navigation: StackNavigationProp<'TodoList'>;
 };
-
 export function TodoListScreen(props: TodoListScreenProps) {
   const { navigation } = props;
 
-  const handleNavigate = () => {
-    navigation.navigate(config.routes.listItem, { id: '1' });
+  const [todoList] = useFetch<undefined, TTodoListData, {}>('todoList.get', {
+    didMount: true,
+  });
+
+  const navigateToAddTodo = () => {
+    navigation.navigate(config.routes.addTodo);
   };
 
   return (
-    <ScreenContainer flex={1} bg="primaryBg">
-      <Text>hi</Text>
+    <ScreenContainer bg="secondaryBg" safeArea>
+      <Card flex={1} padding={[1, 0]}>
+        <Loading loading={todoList.loading}>
+          {todoList.data ? <TodoListItems items={todoList.data} /> : null}
+        </Loading>
+      </Card>
       <Button
-        text="hi there"
-        startIcon="plus"
-        bg="primary"
-        size="lg"
-        typo="lg"
-        bold
+        text="Add Todo"
         block
+        size="lg"
+        typo="md"
+        bg="primary"
+        startIcon="plus"
         iconSize={3}
-        onPress={handleNavigate}
+        bold
+        onPress={navigateToAddTodo}
       />
     </ScreenContainer>
   );
