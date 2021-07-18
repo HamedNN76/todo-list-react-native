@@ -57,7 +57,8 @@ export function TodoListFilter() {
           bg="primaryText"
           color="white"
           _minWidth="0px"
-          _height="24px"
+          alignSelf="center"
+          _height="28px"
           bold={form === undefined}
           typo={form === undefined ? 'sm' : 'xs'}
           onPress={() => handleGetCategoryList()}
@@ -67,12 +68,12 @@ export function TodoListFilter() {
       <Card
         flexDirection="row"
         _flexWrap="wrap"
-        justifyContent="center"
-        margin={[0, 0, 1, 0]}
+        justifyContent="space-between"
+        alignItems="center"
+        margin={1}
       >
         {filters.map(({ label, bg, color }, i) => (
           <Button
-            margin={1}
             key={label}
             text={label}
             bg={bg}
