@@ -3,6 +3,8 @@ import { config } from '../../../config';
 import { navigate } from '../../navigation/navigation';
 import { TTodoListItem } from '../../types/webServices/todoList';
 import { Button, Card, Text } from '../Kit';
+import { HR } from '../Kit/HR';
+import { filters } from './TodoListFilter';
 
 export type TodoListItemProps = {
   item: TTodoListItem;
@@ -12,13 +14,15 @@ export function TodoListItem(props: TodoListItemProps) {
   const { item } = props;
 
   const navigateToTodoItem = () => {
-    navigate(config.routes.listItem, { title: item.title });
+    navigate(config.routes.listItem, { title: item.title, id: item._id });
   };
+
+  const { bg, color } = filters[item.category];
 
   return (
     <Card
       bg="secondaryBg"
-      margin={1}
+      margin={[1, 0]}
       padding={1}
       curve
       border
@@ -27,10 +31,10 @@ export function TodoListItem(props: TodoListItemProps) {
       alignItems="center"
     >
       <Card flex={1} padding={[0, 1, 0, 0]}>
-        <Text typo="lg" bold>
+        <Text typo="lg" bold color={bg}>
           {item.title}
         </Text>
-        <Card borderWidth="0.5px" margin={[0, 0, 1, 0]} />
+        <HR margin={[0, 0, 1, 0]} />
         <Text typo="sm" ellipsizeMode="tail" numberOfLines={1}>
           {item.description}
         </Text>
@@ -43,7 +47,8 @@ export function TodoListItem(props: TodoListItemProps) {
           padding={0}
           _height="40px"
           margin={0}
-          bg="white"
+          bg={bg}
+          color={color}
           onPress={navigateToTodoItem}
         />
       </Card>

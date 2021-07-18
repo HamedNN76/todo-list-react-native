@@ -5,6 +5,7 @@ type RootStackParamList = {
   TodoList: undefined;
   ListItem: {
     title: string;
+    id: string;
   };
   AddTodo: undefined;
 };

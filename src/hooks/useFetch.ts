@@ -21,7 +21,7 @@ export function useFetch<Form, Data, Error>(
   options: TUseFetchOptions<Data> = {}
 ): [
   TUseFetchState<Form, Data, Error>,
-  (fetchOptions: TUseFetchOptions<Data>) => void,
+  (fetchOptions?: TUseFetchOptions<Data>) => void,
   (state: TUseFetchState<Form, Data, Error>) => void
 ] {
   const initialState: TUseFetchState<Form, Data, Error> = {
@@ -34,7 +34,7 @@ export function useFetch<Form, Data, Error>(
     useState<TUseFetchState<Form, Data, Error>>(initialState);
 
   const doFetch = useCallback(
-    async (fetchOptions: TUseFetchOptions<Data>) => {
+    async (fetchOptions: TUseFetchOptions<Data> = {}) => {
       const { showAlert = true, form, afterSuccess } = fetchOptions;
       try {
         setState({

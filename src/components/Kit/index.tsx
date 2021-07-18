@@ -1,3 +1,4 @@
+import { Picker } from '@react-native-picker/picker';
 import { Controller } from 'react-hook-form';
 import { FlatList, ScrollView, RefreshControl } from 'react-native';
 
@@ -11,4 +12,4 @@ export * from './TouchableOpacity';
 export * from './Loading';
 export * from './Input/Input';
 
-export { Controller, FlatList, ScrollView, RefreshControl };
+export { Controller, FlatList, ScrollView, RefreshControl, Picker };

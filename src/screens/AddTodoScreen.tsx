@@ -4,8 +4,9 @@ import { addTodoResolved } from '../validators/AddTodoSchema';
 import { Controller, Input, Button, ScreenContainer } from '../components/Kit';
 import { useFetch } from '../hooks/useFetch';
 import { StackNavigationProp } from '../navigation/Stack';
-import { loadTodoList } from '../redux/modules/todoList';
+import { loadTodoSuccess } from '../redux/modules/todoList';
 import { useAppDispatch } from '../hooks/store';
+import { TTodoListData } from '../types/webServices/todoList';
 
 export type AddTodoScreenProps = {
   navigation: StackNavigationProp<'AddTodo'>;
@@ -19,7 +20,11 @@ export type IAddTodoForm = {
 export function AddTodoScreen(props: AddTodoScreenProps) {
   const { navigation } = props;
 
-  const [createTodo, doCreateTodo] = useFetch('todoList.create');
+  const [createTodo, doCreateTodo] = useFetch<
+    IAddTodoForm & { category: number },
+    TTodoListData,
+    undefined
+  >('todoList.create');
 
   const dispatch = useAppDispatch();
 
@@ -29,9 +34,9 @@ export function AddTodoScreen(props: AddTodoScreenProps) {
         ...data,
         category: 2,
       },
-      afterSuccess: () => {
+      afterSuccess: (newTodoList) => {
         navigation.goBack();
-        dispatch(loadTodoList());
+        dispatch(loadTodoSuccess(newTodoList));
       },
     });
   };
@@ -93,6 +98,7 @@ export function AddTodoScreen(props: AddTodoScreenProps) {
         block
         size="lg"
         typo="md"
+        startIcon="plus"
         bold
         loading={createTodo.loading}
         disabled={createTodo.loading}

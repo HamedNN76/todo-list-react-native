@@ -3,31 +3,32 @@ import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { loadTodoList } from '../../redux/modules/todoList';
 import { Color } from '../../stylesheet';
 import { Button, Card, Text } from '../Kit';
+import { HR } from '../Kit/HR';
 
 export type TFilters = Array<{
-  title: string;
+  label: string;
   bg: Color;
   color: Color;
 }>;
 
 export const filters: TFilters = [
   {
-    title: 'Completed',
+    label: 'Completed',
     bg: 'success',
     color: 'white',
   },
   {
-    title: 'InProgress',
+    label: 'InProgress',
     bg: 'warning',
     color: 'white',
   },
   {
-    title: 'Todo',
-    bg: 'primary',
+    label: 'Todo',
+    bg: 'secondary',
     color: 'primaryText',
   },
   {
-    title: 'Test',
+    label: 'Test',
     bg: 'failure',
     color: 'white',
   },
@@ -52,9 +53,9 @@ export function TodoListFilter() {
         <Text typo="md">Filters</Text>
         <Button
           key="all"
-          text="all"
-          bg="secondary"
-          color="primaryText"
+          text="All"
+          bg="primaryText"
+          color="white"
           _minWidth="0px"
           _height="24px"
           bold={form === undefined}
@@ -62,18 +63,18 @@ export function TodoListFilter() {
           onPress={() => handleGetCategoryList()}
         />
       </Card>
-      <Card borderWidth="0.5px" />
+      <HR />
       <Card
         flexDirection="row"
         _flexWrap="wrap"
         justifyContent="space-between"
         margin={[0, 0, 1, 0]}
       >
-        {filters.map(({ title, bg, color }, i) => (
+        {filters.map(({ label, bg, color }, i) => (
           <Button
             margin={1}
-            key={title}
-            text={title}
+            key={label}
+            text={label}
             bg={bg}
             color={color}
             _minWidth="0px"

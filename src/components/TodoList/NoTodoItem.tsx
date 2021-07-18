@@ -9,7 +9,7 @@ export function NoTodoItem() {
   return (
     <Card bg="secondary" padding={1} curve>
       <Text typo="sm" _textAlign="center">
-        {`There is no ${filters[form]?.title || 'todo'}.`}
+        {`There is no ${filters[form]?.label || 'todo'}.`}
       </Text>
     </Card>
   );
