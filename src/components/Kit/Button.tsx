@@ -56,7 +56,7 @@ export type ButtonProps = StyledButtonProps & {
 };
 
 const setButtonBg = ({ disabled, bg, theme }: StyledButtonProps) =>
-  setBackgroundColor({ bg: disabled ? 'gray900' : bg, theme });
+  setBackgroundColor({ bg: disabled ? 'gray500' : bg, theme });
 
 const StyledButton: React.FunctionComponent<StyledButtonProps> = styled.TouchableOpacity<StyledButtonProps>`
   ${setButtonBg};

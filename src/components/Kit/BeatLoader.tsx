@@ -8,7 +8,7 @@ export type BeatLoaderProps = {
 };
 
 export function BeatLoader(props: BeatLoaderProps): JSX.Element {
-  const { color = 'primaryText' } = props;
+  const { color = 'white' } = props;
 
   return <ActivityIndicator size="large" color={colors[color]} />;
 }
