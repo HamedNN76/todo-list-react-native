@@ -1,7 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { addTodoResolved } from '../validators/AddTodoSchema';
-import { Controller, Input, Button, ScreenContainer } from '../components/Kit';
+import {
+  Controller,
+  Input,
+  Button,
+  ScreenContainer,
+  KeyboardAwareScrollView,
+} from '../components/Kit';
 import { useFetch } from '../hooks/useFetch';
 import { StackNavigationProp } from '../navigation/Stack';
 import { loadTodoSuccess } from '../redux/modules/todoList';
@@ -51,58 +57,60 @@ export function AddTodoScreen(props: AddTodoScreenProps) {
 
   return (
     <ScreenContainer padding={[1, 2]} dismissKeyboard safeArea>
-      <Controller
-        name="title"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input
-            onBlur={onBlur}
-            onChangeText={onChange}
-            error={errors?.title?.message}
-            value={value}
-            title="Title"
-            placeholder="Todo title..."
-            required
-            onSubmitEditing={handleSubmit(onSubmit)}
-            returnKeyType="next"
-            blurOnSubmit={false}
-            iconName="plus"
-          />
-        )}
-      />
-      <Controller
-        name="description"
-        control={control}
-        defaultValue=""
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input
-            onBlur={onBlur}
-            onChangeText={onChange}
-            error={errors?.description?.message}
-            value={value}
-            title="Description"
-            placeholder="Todo description..."
-            required
-            onSubmitEditing={handleSubmit(onSubmit)}
-            returnKeyType="done"
-            blurOnSubmit={false}
-            iconName="list"
-          />
-        )}
-      />
-      <Button
-        text="Add"
-        onPress={handleSubmit(onSubmit)}
-        bg="primary"
-        block
-        size="lg"
-        typo="md"
-        startIcon="plus"
-        bold
-        loading={createTodo.loading}
-        disabled={createTodo.loading}
-      />
+      <KeyboardAwareScrollView>
+        <Controller
+          name="title"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              onBlur={onBlur}
+              onChangeText={onChange}
+              error={errors?.title?.message}
+              value={value}
+              title="Title"
+              placeholder="Todo title..."
+              required
+              onSubmitEditing={handleSubmit(onSubmit)}
+              returnKeyType="next"
+              blurOnSubmit={false}
+              iconName="plus"
+            />
+          )}
+        />
+        <Controller
+          name="description"
+          control={control}
+          defaultValue=""
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              onBlur={onBlur}
+              onChangeText={onChange}
+              error={errors?.description?.message}
+              value={value}
+              title="Description"
+              placeholder="Todo description..."
+              required
+              onSubmitEditing={handleSubmit(onSubmit)}
+              returnKeyType="done"
+              blurOnSubmit={false}
+              iconName="list"
+            />
+          )}
+        />
+        <Button
+          text="Add"
+          onPress={handleSubmit(onSubmit)}
+          bg="primary"
+          block
+          size="lg"
+          typo="md"
+          startIcon="plus"
+          bold
+          loading={createTodo.loading}
+          disabled={createTodo.loading}
+        />
+      </KeyboardAwareScrollView>
     </ScreenContainer>
   );
 }

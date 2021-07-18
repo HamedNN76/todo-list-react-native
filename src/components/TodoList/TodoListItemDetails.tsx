@@ -9,7 +9,7 @@ import { colors } from '../../stylesheet';
 import { TTodoListData, TTodoListItem } from '../../types/webServices/todoList';
 import { setVariables } from '../../utils/fetch';
 import { editTodoResolved } from '../../validators/EditTodoSchema';
-import { Button, Card, Controller, Input, Picker } from '../Kit';
+import { Button, Card, Controller, Input, Picker, ScrollView } from '../Kit';
 import { InputTitle } from '../Kit/Input/InputTitle';
 import { filters } from './TodoListFilter';
 
@@ -75,7 +75,7 @@ export function TodoListItemDetails(props: TodoListItemDetailsProps) {
   const { category } = watch();
 
   return (
-    <Card>
+    <ScrollView>
       <Controller
         name="title"
         control={control}
@@ -160,6 +160,6 @@ export function TodoListItemDetails(props: TodoListItemDetailsProps) {
         disabled={deleteState.loading}
         margin={[3, 0, 0, 0]}
       />
-    </Card>
+    </ScrollView>
   );
 }

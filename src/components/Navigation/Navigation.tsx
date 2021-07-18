@@ -20,12 +20,13 @@ export function Navigation(): JSX.Element {
           screenOptions={{
             headerStyle: {
               backgroundColor: colors.headerBg,
-              height: 100,
+              height: config.isAndroid() ? 60 : 100,
             },
             headerBackTitleStyle: {
               color: colors.white,
             },
             headerTintColor: colors.white,
+            headerTitleAlign: 'center',
           }}
         >
           <Stack.Screen

@@ -67,7 +67,7 @@ export function TodoListFilter() {
       <Card
         flexDirection="row"
         _flexWrap="wrap"
-        justifyContent="space-between"
+        justifyContent="center"
         margin={[0, 0, 1, 0]}
       >
         {filters.map(({ label, bg, color }, i) => (

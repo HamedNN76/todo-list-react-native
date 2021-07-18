@@ -17,7 +17,7 @@ export const config: Config = {
     listItem: 'ListItem',
     addTodo: 'AddTodo',
   },
-  baseUrl: 'http://localhost:3030',
+  baseUrl: 'http://192.168.1.105:3030',
   isIos: () => Platform.OS === 'ios',
   isAndroid: () => Platform.OS === 'android',
 };

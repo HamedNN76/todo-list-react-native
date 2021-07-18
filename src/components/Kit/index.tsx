@@ -10,6 +10,7 @@ export * from './Icon';
 export * from './ScreenContainer';
 export * from './TouchableOpacity';
 export * from './Loading';
+export * from './KeyboardAwareScrollView';
 export * from './Input/Input';
 
 export { Controller, FlatList, ScrollView, RefreshControl, Picker };
